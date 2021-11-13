@@ -6,9 +6,10 @@ import store from './Redux/store';
 
 
 function Square(props) {
+  let box = props.box;
   
   return (
-    <div className="square" id={props.box} onClick={props.onClick}>{props.box}</div>
+    <div className="square" id={box} onClick={props.onClick}>{props.squares[box]}</div>
   );
 }
 
@@ -16,8 +17,8 @@ function Board(props) {
   
   
   return (
+    <div >
     <div className="board">
-      {/* {console.log(props.squares)} */}
       <Square box={0}  onClick={() => props.onClick(0)} squares={props.squares}/>
       <Square box={1}  onClick={() => props.onClick(1)} squares={props.squares}/>
       <Square box={2}  onClick={() => props.onClick(2)} squares={props.squares}/>
@@ -28,14 +29,21 @@ function Board(props) {
       <Square box={7}  onClick={() => props.onClick(7)} squares={props.squares}/>
       <Square box={8}  onClick={() => props.onClick(8)} squares={props.squares}/>
     </div>
+    {<br/>}
+    <button className="button" onClick={props.reset}>Reset Board</button>
+    </div>
   );
 }
 
 function App(props) {
+  
+  let nextPlayerIs = props.xIsNext ? "X" : "O";
+  let myStyle = props.xIsNext ? {color: "blue", fontWeight: "bold"} : {color: "red", fontWeight: "bold"};
+  
   return (
     <div className="App">
-      <p>Next Player is:</p>
-      <Board onClick={(i) => props.handleClick(i)} squares={props.squares}/>
+      <div>Next Player is: <span style={myStyle}>{nextPlayerIs}</span></div>{<br/>}
+      <Board reset={() => props.resetBoard()} onClick={(i) => props.handleClick(i)} squares={props.squares}/>
     </div>
   );
 }

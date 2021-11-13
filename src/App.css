@@ -59,4 +59,11 @@ font-size: 25px;
 .board {
   display: grid;
   grid-template-columns: 50px 50px 50px;
+  
+}
+
+.button {
+  position: relative;
+  left: 31px
+  
 }

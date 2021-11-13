@@ -1,10 +1,17 @@
 const CHOICE = "CHOICE";
+const RESET = "RESET";
 
 const handleClick = (i) => {
 return {
     type: CHOICE,
-    index: i
+    index: i,
+    }
 }
+
+const resetBoard =() => {
+    return {
+        type: RESET
+    }
 }
 
 export const mapStateToProps = (state) => {
@@ -13,6 +20,7 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-        handleClick: (i) => {dispatch(handleClick(i))}
+        handleClick: (i) => {dispatch(handleClick(i))},
+        resetBoard: () => {dispatch(resetBoard())}
     };
 }
