@@ -54,6 +54,10 @@ font-size: 25px;
   
 }
 
+.disabled {
+  display: none;
+}
+
 .status {
   text-align: center;
 }

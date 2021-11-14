@@ -5,7 +5,7 @@ export function Board(props) {
 
     const renderSquare = (i) => {
       return (
-        <Square box={i}  onClick={() => props.onClick(i)} squares={props.history[props.stepNumber].squares}/>
+        <Square box={i} forDisplay={props.forDisplay} onClick={ props.forDisplay ? null : () => props.onClick(i)} squares={props.forDisplay ? props.squares : props.history[props.stepNumber].squares}/>
       );
     }
 
@@ -14,15 +14,15 @@ export function Board(props) {
         rows.push(renderSquare(i));
     }
   
-    let nextPlayerIs = props.xIsNext ? "X" : "O";
+    let nextPlayerIs = props.forDisplay ? null: props.xIsNext ? "X" : "O";
     let status;
-    let squares = props.history[props.stepNumber].squares
+    let squares = props.forDisplay ? props.squares : props.history[props.stepNumber].squares;
     let winner = checkForWinner(squares);
   
     if(winner) {
       status = winner + " is the Winner!";
     } else {
-      status = "Next Player is: " + nextPlayerIs;
+      status = props.forDisplay ? "Move " + props.stepNumber: "Next Player is: " + nextPlayerIs;
     }
     
     return (
@@ -32,40 +32,8 @@ export function Board(props) {
           {rows}
         </div>
           {<br/>}
-        <button className="button" onClick={props.reset}>
+        <button className={props.forDisplay ? "disabled" : "button"} onClick={props.reset}>
           Reset Board</button>
-      </div>
-    );
-  }
-  
-  export function DisplayBoard(props) {
-  
-    const renderSquare = (i) => {
-      return (
-        <DisplaySquare box={i} squares={props.squares}/>
-      );
-    }
-    let rows = [];
-    for(let i =0; i<9; i++) {
-        rows.push(renderSquare(i));
-    }
-
-    let status;
-    let squares = props.squares
-    let winner = checkForWinner(squares);
-  
-    if(winner) {
-      status = winner + " is the Winner!";
-    } else {
-      status = "Move " + props.stepNumber;
-    }
-    
-    return (
-      <div >
-        <div className="status">{status}</div>{<br/>}
-        <div className="board">
-          {rows}
-        </div>
       </div>
     );
   }

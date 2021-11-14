@@ -9,9 +9,11 @@ import { Board, DisplayBoard } from "./boardComponents"
 function App(props) {
 
   let boardMovesDisplay = props.history.map((step,i) => {return (<div className="displayBoard">
-    <DisplayBoard
-    squares={step.squares}
-    stepNumber={i}
+    <Board 
+        forDisplay={true}
+        stepNumber = {i} 
+        squares={step.squares} 
+        xIsNext={props.xIsNext}
     />
     </div>)});
 
