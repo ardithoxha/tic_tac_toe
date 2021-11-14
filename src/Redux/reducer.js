@@ -1,4 +1,4 @@
-import { checkForWinner } from "../App";
+import { checkForWinner } from "../checkForWinner";
 
 const defaultState = {
     history: [{squares: Array(9).fill(null)}],
