@@ -38,8 +38,22 @@ font-size: 25px;
   
 }
 
+.displayBoard {
+  margin-left: 10px;
+}
+
+.displayBoardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 75vw;
+}
+
 .button {
   position: relative;
   left: 31px
   
+}
+
+.status {
+  text-align: center;
 }

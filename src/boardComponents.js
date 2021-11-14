@@ -1,6 +1,5 @@
 import { Square, DisplaySquare } from './squareComponents';
 import { checkForWinner } from './checkForWinner';
-import { render } from '@testing-library/react';
 
 export function Board(props) {
 
@@ -28,7 +27,7 @@ export function Board(props) {
     
     return (
       <div >
-        <div style={{textAlign: "center"}}>{status}</div>{<br/>}
+        <div className="status">{status}</div>{<br/>}
         <div className="board">
           {rows}
         </div>
@@ -63,7 +62,7 @@ export function Board(props) {
     
     return (
       <div >
-        <div style={{textAlign: "center"}}>{status}</div>{<br/>}
+        <div className="status">{status}</div>{<br/>}
         <div className="board">
           {rows}
         </div>

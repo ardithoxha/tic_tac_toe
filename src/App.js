@@ -8,7 +8,7 @@ import { Board, DisplayBoard } from "./boardComponents"
 
 function App(props) {
 
-  let boardMovesDisplay = props.history.map((step,i) => {return (<div style={{marginLeft: "10px"}}>
+  let boardMovesDisplay = props.history.map((step,i) => {return (<div className="displayBoard">
     <DisplayBoard
     squares={step.squares}
     stepNumber={i}
@@ -37,7 +37,7 @@ let moves =  props.history.map(
             <ol>{moves}</ol>
             </div>
         </div>
-        <div style={{display: 'flex', flexWrap: "wrap", maxWidth: "75vw"}} > 
+        <div className="displayBoardContainer">
         {boardMovesDisplay}
         </div>
         
