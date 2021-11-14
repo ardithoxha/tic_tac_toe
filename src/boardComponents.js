@@ -1,5 +1,6 @@
 import { Square, DisplaySquare } from './squareComponents';
 import { checkForWinner } from './checkForWinner';
+import { render } from '@testing-library/react';
 
 export function Board(props) {
 
@@ -7,6 +8,11 @@ export function Board(props) {
       return (
         <Square box={i}  onClick={() => props.onClick(i)} squares={props.history[props.stepNumber].squares}/>
       );
+    }
+
+    let rows = [];
+    for(let i =0; i<9; i++) {
+        rows.push(renderSquare(i));
     }
   
     let nextPlayerIs = props.xIsNext ? "X" : "O";
@@ -24,15 +30,7 @@ export function Board(props) {
       <div >
         <div style={{textAlign: "center"}}>{status}</div>{<br/>}
         <div className="board">
-          {renderSquare(0)}
-          {renderSquare(1)}
-          {renderSquare(2)}
-          {renderSquare(3)}
-          {renderSquare(4)}
-          {renderSquare(5)}
-          {renderSquare(6)}
-          {renderSquare(7)}
-          {renderSquare(8)}
+          {rows}
         </div>
           {<br/>}
         <button className="button" onClick={props.reset}>
@@ -48,7 +46,11 @@ export function Board(props) {
         <DisplaySquare box={i} squares={props.squares}/>
       );
     }
-    
+    let rows = [];
+    for(let i =0; i<9; i++) {
+        rows.push(renderSquare(i));
+    }
+
     let status;
     let squares = props.squares
     let winner = checkForWinner(squares);
@@ -63,15 +65,7 @@ export function Board(props) {
       <div >
         <div style={{textAlign: "center"}}>{status}</div>{<br/>}
         <div className="board">
-          {renderSquare(0)}
-          {renderSquare(1)}
-          {renderSquare(2)}
-          {renderSquare(3)}
-          {renderSquare(4)}
-          {renderSquare(5)}
-          {renderSquare(6)}
-          {renderSquare(7)}
-          {renderSquare(8)}
+          {rows}
         </div>
       </div>
     );
