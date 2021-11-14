@@ -1,5 +1,6 @@
 const CHOICE = "CHOICE";
 const RESET = "RESET";
+const JUMP = "JUMP"
 
 const handleClick = (i) => {
 return {
@@ -14,6 +15,13 @@ const resetBoard =() => {
     }
 }
 
+const goToStep = (i) => {
+    return {
+        type: JUMP,
+        move: i
+    }
+}
+
 export const mapStateToProps = (state) => {
     return state;
 }
@@ -21,6 +29,7 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => {
     return {
         handleClick: (i) => {dispatch(handleClick(i))},
-        resetBoard: () => {dispatch(resetBoard())}
+        resetBoard: () => {dispatch(resetBoard())},
+        goToStep: (i) => {dispatch(goToStep(i))}
     };
 }

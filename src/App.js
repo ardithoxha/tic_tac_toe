@@ -55,16 +55,10 @@ function Board(props) {
 
 function App(props) {
 
-  let testHistory = [{test: "TestObj"}]
-
-// let moves = testHistory.map((step) => {return (step.test)});
 let moves =  props.history.map(
-              (step,i) => {
-                return (
-                <li>
-                  <button>{i===0 ? "Go to the start" : "Go to step " + i}</button>
-                  </li>
-                  );});
+              (step,i) => {return (<li key={i}>
+                  <button onClick={() => {props.goToStep(i)}}>{i===0 ? "Go to the start" : "Go to step " + i}</button>
+                  </li>);});
 
   return (
     <div className="App">

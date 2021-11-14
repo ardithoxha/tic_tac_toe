@@ -29,7 +29,12 @@ const reducer = (state = defaultState, action) => {
             } else {
                 return state;
             }
-            
+        case "JUMP":
+            return {
+                history: state.history.slice(0,action.move+1),
+                stepNumber: action.move,
+                xIsNext: (action.move%2 === 0? true: false)
+            }
         case "RESET":
             let squares = Array(9).fill(null);
             return {
