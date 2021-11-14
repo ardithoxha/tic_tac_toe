@@ -1,24 +1,28 @@
-import { Square, DisplaySquare } from './squareComponents';
+import { Square } from './squareComponents';
 import { checkForWinner } from './checkForWinner';
 
 export function Board(props) {
 
     const renderSquare = (i) => {
       return (
-        <Square box={i} forDisplay={props.forDisplay} onClick={ props.forDisplay ? null : () => props.onClick(i)} squares={props.forDisplay ? props.squares : props.history[props.stepNumber].squares}/>
+        <Square 
+        box={i} 
+        forDisplay={props.forDisplay} 
+        onClick={ props.forDisplay ? null : () => props.onClick(i)} 
+        squares={props.forDisplay ? props.squares : props.history[props.stepNumber].squares}
+        />
       );
     }
 
-    let rows = [];
+    const rows = [];
     for(let i =0; i<9; i++) {
         rows.push(renderSquare(i));
     }
-  
-    let nextPlayerIs = props.forDisplay ? null: props.xIsNext ? "X" : "O";
+    
+    const squares = props.forDisplay ? props.squares : props.history[props.stepNumber].squares;
+    const winner = checkForWinner(squares);
     let status;
-    let squares = props.forDisplay ? props.squares : props.history[props.stepNumber].squares;
-    let winner = checkForWinner(squares);
-  
+    const nextPlayerIs = props.forDisplay ? null: props.xIsNext ? "X" : "O";
     if(winner) {
       status = winner + " is the Winner!";
     } else {

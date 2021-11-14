@@ -1,6 +1,6 @@
 export function checkForWinner(squares){
 
-    let winner = [
+    const winner = [
       [0,1,2],
       [3,4,5],
       [6,7,8],
@@ -13,7 +13,7 @@ export function checkForWinner(squares){
   
   
   for (let i =0; i<winner.length;i++) {
-    let [a,b,c] = winner[i];
+    const [a,b,c] = winner[i];
     if(squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }

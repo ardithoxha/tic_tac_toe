@@ -3,25 +3,26 @@ import { mapStateToProps,mapDispatchToProps} from './Redux/actioncreators';
 import './App.css';
 import React from 'react';
 import store from './Redux/store';
-import { Board, DisplayBoard } from "./boardComponents"
+import { Board } from "./boardComponents"
 
 
 function App(props) {
 
-  let boardMovesDisplay = props.history.map((step,i) => {return (<div className="displayBoard">
-    <Board 
-        forDisplay={true}
-        stepNumber = {i} 
-        squares={step.squares} 
-        xIsNext={props.xIsNext}
-    />
+  let boardMovesDisplay = props.history.map((step,i) => {return (<div className="displayBoard" key={i}>
+      <Board 
+          forDisplay={true}
+          stepNumber = {i} 
+          squares={step.squares} 
+          xIsNext={props.xIsNext}
+      />
     </div>)});
 
 
 let moves =  props.history.map(
               (step,i) => {return (<li key={i}>
                   <button onClick={() => {props.goToStep(i)}}>{i===0 ? "Go to the start" : "Go to step " + i}</button>
-                  </li>);});
+                  </li>);}
+                  );
 
   return (
     <div className="App">
@@ -37,8 +38,9 @@ let moves =  props.history.map(
           <div className="history">
             <p>Moves History!</p>
             <ol>{moves}</ol>
-            </div>
+          </div>
         </div>
+        
         <div className="displayBoardContainer">
         {boardMovesDisplay}
         </div>
