@@ -13,6 +13,14 @@ function Square(props) {
   );
 }
 
+function DisplaySquare(props) {
+  let box = props.box;
+  
+  return (
+    <div className="square" id={box}>{props.squares[box]}</div>
+  );
+}
+
 function Board(props) {
 
   const renderSquare = (i) => {
@@ -53,7 +61,51 @@ function Board(props) {
   );
 }
 
+function DisplayBoard(props) {
+
+  const renderSquare = (i) => {
+    return (
+      <DisplaySquare box={i} squares={props.squares}/>
+    );
+  }
+  
+  let status;
+  let squares = props.squares
+  let winner = checkForWinner(squares);
+
+  if(winner) {
+    status = winner + " is the Winner!";
+  } else {
+    status = "Move " + props.stepNumber;
+  }
+  
+  return (
+    <div >
+      <div style={{textAlign: "center"}}>{status}</div>{<br/>}
+      <div className="board">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
+      </div>
+    </div>
+  );
+}
+
 function App(props) {
+
+  let test = props.history.map((step,i) => {return (<div style={{marginLeft: "10px"}}>
+    <DisplayBoard
+    squares={step.squares}
+    stepNumber={i}
+    />
+    </div>)});
+
 
 let moves =  props.history.map(
               (step,i) => {return (<li key={i}>
@@ -76,6 +128,10 @@ let moves =  props.history.map(
             <ol>{moves}</ol>
             </div>
         </div>
+        <div style={{display: 'flex', flexWrap: "wrap", maxWidth: "75vw"}} > 
+        {test}
+        </div>
+        
     </div>
   );
 }
