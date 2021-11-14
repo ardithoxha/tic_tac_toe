@@ -17,13 +17,14 @@ function Board(props) {
 
   const renderSquare = (i) => {
     return (
-      <Square box={i}  onClick={() => props.onClick(i)} squares={props.squares}/>
+      <Square box={i}  onClick={() => props.onClick(i)} squares={props.history[props.stepNumber].squares}/>
     );
   }
 
   let nextPlayerIs = props.xIsNext ? "X" : "O";
   let status;
-  let winner = checkForWinner(props.squares);
+  let squares = props.history[props.stepNumber].squares
+  let winner = checkForWinner(squares);
 
   if(winner) {
     status = winner + " is the Winner!";
@@ -53,14 +54,34 @@ function Board(props) {
 }
 
 function App(props) {
+
+  let testHistory = [{test: "TestObj"}]
+
+// let moves = testHistory.map((step) => {return (step.test)});
+let moves =  props.history.map(
+              (step,i) => {
+                return (
+                <li>
+                  <button>{i===0 ? "Go to the start" : "Go to step " + i}</button>
+                  </li>
+                  );});
+
   return (
     <div className="App">
       <Board 
         reset={() => props.resetBoard()} 
-        onClick={(i) => props.handleClick(i)} 
-        squares={props.squares} 
+        onClick={(i) => props.handleClick(i)}
+        stepNumber = {props.stepNumber} 
+        history={props.history} 
         xIsNext={props.xIsNext}
         />
+
+        <div>
+          <div className="history">
+            <p>Moves History!</p>
+            <ol>{moves}</ol>
+            </div>
+        </div>
     </div>
   );
 }
@@ -81,7 +102,7 @@ export function checkForWinner(squares){
 
 for (let i =0; i<winner.length;i++) {
   let [a,b,c] = winner[i];
-  if(squares[a] == squares[b] && squares[a] == squares[c]) {
+  if(squares[a] === squares[b] && squares[a] === squares[c]) {
     return squares[a];
   }
 }

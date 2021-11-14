@@ -1,7 +1,8 @@
 import { checkForWinner } from "../App";
 
 const defaultState = {
-    squares: Array(9).fill(null), 
+    history: [{squares: Array(9).fill(null)}],
+    stepNumber: 0, 
     xIsNext: true,
     };
 
@@ -10,23 +11,30 @@ const reducer = (state = defaultState, action) => {
     switch(action.type) {
         case "CHOICE":
             
-                if(state.squares[action.index] == null) {
-                    let squares = state.squares.slice();
-                    if(checkForWinner(squares)) {
-                        return state;
-                    }
+            if(checkForWinner(state.history[state.stepNumber].squares)) {
+                return state;
+            }
 
-                    squares[action.index] = state.xIsNext ? "X" : "O";
-                    return {squares: squares, xIsNext: !state.xIsNext};
-                    
-                } else {
-                    return state;
-                }
+            if(state.history[state.stepNumber].squares[action.index] == null) {
+
+                let squares = state.history[state.stepNumber].squares.slice();
+                squares[action.index] = state.xIsNext ? "X" : "O";
+                
+                return {
+                    history: state.history.concat({squares: squares}),
+                    stepNumber: state.stepNumber + 1, 
+                    xIsNext: !state.xIsNext
+                };
+                
+            } else {
+                return state;
+            }
             
         case "RESET":
             let squares = Array(9).fill(null);
             return {
-                squares: squares,
+                history: [{squares: squares}],
+                stepNumber: 0,
                 xIsNext: true
             };    
         default:
