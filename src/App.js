@@ -8,7 +8,7 @@ import { Board } from "./boardComponents"
 
 function App(props) {
 
-  let boardMovesDisplay = props.history.map((step,i) => {return (<div className="displayBoard" key={i}>
+  let boardMovesDisplay = props.history.map((step,i) => {return (<div key={i}>
       <Board 
           forDisplay={true}
           stepNumber = {i} 
@@ -34,11 +34,9 @@ let moves =  props.history.map(
         xIsNext={props.xIsNext}
         />
 
-        <div>
-          <div className="history">
-            <p>Moves History!</p>
-            <ol>{moves}</ol>
-          </div>
+        <div className="history">
+            <div>Moves History!</div>
+            <div><ol>{moves}</ol></div>
         </div>
         
         <div className="displayBoardContainer">

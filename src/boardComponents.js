@@ -30,14 +30,16 @@ export function Board(props) {
     }
     
     return (
-      <div >
+      <div className="boardContainer">
         <div className="status">{status}</div>{<br/>}
         <div className="board">
           {rows}
         </div>
           {<br/>}
-        <button className={props.forDisplay ? "disabled" : "button"} onClick={props.reset}>
+        <div className="buttonContainer">
+          <button className={props.forDisplay ? "disabled" : "button"} onClick={props.reset}>
           Reset Board</button>
+        </div>
       </div>
     );
   }
